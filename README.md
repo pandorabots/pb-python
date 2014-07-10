@@ -4,6 +4,8 @@ Pandorabots API module for Python
 
 ﻿This is a guide for the Pandorabots SDK for the Python programming language. It provides usage guidelines as well code examples.
 
+Each API requires an API Key, which can be received after registering at: http:/developer.pandorabots.com
+
 The first thing to do is download main.py. Download this file to the location where you intend to write your scripts that make use of the Pandorabots APIs. For this file to run properly, make sure you have the python Requests library installed. Getting started is easy. All you have to do is write the following line at the top of your code.
 
 ```
