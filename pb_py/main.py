@@ -1,6 +1,6 @@
 import requests
 
-host = "http://aiaas.pandorabots.com"
+host = "https://aiaas.pandorabots.com"
 
 def create_bot(user_key,username,botname):
     path = '/bot/' + username +'/' + botname
