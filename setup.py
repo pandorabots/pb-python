@@ -4,7 +4,7 @@ setup(
     name='PbPython',
     version='0.1.1',
     author='Michael Kunze',
-    author_email='mikekunze@gmail.com',
+    author_email='michael.kunze@pandorabots.com',
     packages=['pb_py'],
     license='LICENSE.txt',
     url="http://github.com/pandorabots/pb-python",

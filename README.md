@@ -80,7 +80,7 @@ API.talk(user_key, username, botname, input_text, session_id, recent=True)
 
 To debug input to a bot:
 
-Note: session_id, reset, trace, and recent  are all optional parameters. In the example provided, they are all passed in as _True_. Trace, if included, will include AIML trace information for an input  Reset resets a bot’s memory, erasing predicates as well as that and topic information. Trace 
+Note: session_id, reset, trace, and recent  are all optional parameters. In the example provided, they are all passed in as _True_. Trace, if included, will include AIML trace information for an input  Reset resets a bot’s memory, erasing predicates as well as that and topic information. 
 
 ```
 
