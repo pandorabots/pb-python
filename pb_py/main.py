@@ -1,10 +1,10 @@
 import requests
 
-host = "https://aiaas.pandorabots.com"
+host_base = "https://"
 
-def create_bot(user_key,username,botname):
+def create_bot(user_key,username,host,botname):
     path = '/bot/' + username +'/' + botname
-    url = host + path
+    url = host_base + host + path
     query = {"user_key": user_key}
     response = requests.put(url, params=query)
     if response.ok:
@@ -13,9 +13,10 @@ def create_bot(user_key,username,botname):
         output = 'Bot creation failed! ' + response.json()['message'] + '.'
     print output
 
-def delete_bot(user_key,username,botname):
+def delete_bot(user_key,username,host,botname):
     path = '/bot/' + username +'/' + botname
     url = host + path
+    url = host_base + host + path
     query = {"user_key": user_key}
     response = requests.delete(url, params=query)
     if response.ok:
@@ -25,7 +26,7 @@ def delete_bot(user_key,username,botname):
         output += '%d %s' % (response.status_code, response.reason)
     print output
 
-def upload_file(user_key,username,botname,filename,file_kind):
+def upload_file(user_key,username,host,botname,filename,file_kind):
     path = '/bot/' + username + '/' + botname + '/'
     if file_kind == 'pdefaults' or file_kind =='properties':
         path += file_kind
@@ -33,7 +34,7 @@ def upload_file(user_key,username,botname,filename,file_kind):
         path += file_kind + '/' + filename.split('.')[0]
     if file_kind == 'aiml':
         path += 'file/' + filename
-    url = host + path
+    url = host_base + host + path
     data = open(filename,'rb').read()
     query = {"user_key": user_key}
     response = requests.put(url, params=query, data=data)
@@ -42,9 +43,9 @@ def upload_file(user_key,username,botname,filename,file_kind):
     else:
         print response.reason
 
-def compile_bot(user_key,username, botname):
+def compile_bot(user_key,username,host, botname):
     path = '/bot/' + username +'/' + botname + '/verify'
-    url = host + path
+    url = host_base + host + path
     query = {"user_key": user_key}
     response = requests.get(url, params=query)
     if response.ok:
@@ -56,9 +57,9 @@ def compile_bot(user_key,username, botname):
         output = message + '\n' + error + '\n'
     print output
 
-def talk(user_key, username, botname, input_text, session_id, recent=False, reset=False, trace=False):
+def talk(user_key, username, host, botname, input_text, session_id, recent=False, reset=False, trace=False):
     path = '/talk/' + username + '/' + botname
-    url = host + path
+    url = host_base + host + path
     query = {"user_key": user_key,
              "input": input_text
              }
@@ -98,11 +99,11 @@ def talk(user_key, username, botname, input_text, session_id, recent=False, rese
     print output
     return sessionid
 
-def init_talk(user_key, username, botname, input_text, recent=False):
+def init_talk(user_key, username, host, botname, input_text, recent=False):
     session_id=talk(user_key, username, botname, input_text, '', recent)
     return session_id
 
-def debug_bot(user_key, username, botname, input_text, session_id='', recent=False, reset=False, trace=False):
+def debug_bot(user_key, username, host, botname, input_text, session_id='', recent=False, reset=False, trace=False):
     talk(user_key, username, botname, input_text, session_id, recent, reset, trace)
 
                           

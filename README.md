@@ -20,11 +20,12 @@ Github and install it manually:
     git clone https://github.com/pandorabots/pb-python.git
     python setup.py install
 
- All you have to do is write the following line at the top of your code.
+ All you have to do is write the following lines to the top of your code.
 
 ```
 
 import Pandorabots_API_Calls as API
+host = 'aiaas.pandorabots.com'
 
 ```
 
@@ -32,7 +33,7 @@ To create a bot:
 
 ```
 
-API.create_bot(user_key, username, botname)
+API.create_bot(user_key, host, username, botname)
 
 ```
 
@@ -40,7 +41,7 @@ To delete a bot:
 
 ```
 
-API.delete_bot(user_key, username, botname)
+API.delete_bot(user_key, username, host, botname)
 
 ```
 
@@ -50,7 +51,7 @@ Note: The argument specified by filename should in the same folder as your code,
 
 ```
 
-API.upload_file(user_key, username, botname, filename, file_kind)
+API.upload_file(user_key, username, host, botname, filename, file_kind)
 
 ```
 
@@ -58,7 +59,7 @@ To compile a bot:
 
 ```
 
-API.compile_bot(user_key, username, botname)
+API.compile_bot(user_key, username, host, botname)
 
 ```
 
@@ -66,7 +67,7 @@ To initiate a conversation with a bot. This function returns a _session_id_, whi
 
 ```
 
-session_id = API.init_talk(user_key, username, botname, input_text, recent=True)
+session_id = API.init_talk(user_key, username, host, botname, input_text, recent=True)
 
 ```
 
@@ -74,7 +75,7 @@ To continue a conversation with a bot. This function requires a session_id, such
 
 ```
 
-API.talk(user_key, username, botname, input_text, session_id, recent=True)
+API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
 
 ```
 
@@ -84,7 +85,7 @@ Note: session_id, reset, trace, and recent  are all optional parameters. In the 
 
 ```
 
-API.debug_bot(user_key, username, botname, input_text, session_id=True, reset=True, trace=True, recent=True)
+API.debug_bot(user_key, username, host, botname, input_text, session_id=True, reset=True, trace=True, recent=True)
 
 ```
 
