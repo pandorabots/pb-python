@@ -4,7 +4,7 @@ Pandorabots API module for Python
 
 ﻿This is a guide for the Pandorabots SDK for the Python programming language. It provides usage guidelines as well as code examples.
 
-Each API requires an API Key, which will be received following registration at: http:/developer.pandorabots.com
+Please read the [Documentation.] (https://developer.pandorabots.com/docs)
 
 
 Installation
