@@ -24,7 +24,7 @@ Github and install it manually:
 
 ```
 
-import Pandorabots_API_Calls as API
+from pb_py import main as API
 host = 'aiaas.pandorabots.com'
 
 ```
