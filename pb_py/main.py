@@ -100,10 +100,10 @@ def talk(user_key, username, host, botname, input_text, session_id, recent=False
     return sessionid
 
 def init_talk(user_key, username, host, botname, input_text, recent=False):
-    session_id=talk(user_key, username, botname, input_text, '', recent)
+    session_id=talk(user_key, username, host, botname, input_text, '', recent)
     return session_id
 
 def debug_bot(user_key, username, host, botname, input_text, session_id='', recent=False, reset=False, trace=False):
-    talk(user_key, username, botname, input_text, session_id, recent, reset, trace)
+    talk(user_key, username, host, botname, input_text, session_id, recent, reset, trace)
 
                           
