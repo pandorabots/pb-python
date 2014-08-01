@@ -18,6 +18,7 @@ You may also use Git to clone the repository from
 Github and install it manually:
 
     git clone https://github.com/pandorabots/pb-python.git
+    cd pb-python
     python setup.py install
 
  All you have to do is write the following lines to the top of your code.
