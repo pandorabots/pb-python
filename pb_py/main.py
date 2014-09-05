@@ -57,7 +57,7 @@ def compile_bot(user_key,username,host, botname):
         output = message + '\n' + error + '\n'
     print output
 
-def talk(user_key, username, host, botname, input_text, session_id, recent=False, reset=False, trace=False):
+def talk(user_key, username, host, botname, input_text, session_id, recent=False, reset=False, trace=False, clientID=false):
     path = '/talk/' + username + '/' + botname
     url = host_base + host + path
     query = {"user_key": user_key,
@@ -71,6 +71,8 @@ def talk(user_key, username, host, botname, input_text, session_id, recent=False
         query['reset'] = reset
     if trace:
         query['trace'] = trace
+    if clientID:
+        query['client_name'] = clientID
     response = requests.post(url, params=query)
     result = response.json()
     status = result['status']
@@ -99,9 +101,6 @@ def talk(user_key, username, host, botname, input_text, session_id, recent=False
     print output
     return sessionid
 
-def init_talk(user_key, username, host, botname, input_text, recent=False):
-    session_id=talk(user_key, username, host, botname, input_text, '', recent)
-    return session_id
 
 def debug_bot(user_key, username, host, botname, input_text, session_id='', recent=False, reset=False, trace=False):
     talk(user_key, username, host, botname, input_text, session_id, recent, reset, trace)

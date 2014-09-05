@@ -64,15 +64,7 @@ API.compile_bot(user_key, username, host, botname)
 
 ```
 
-To initiate a conversation with a bot. This function returns a _session_id_, which allows the bot to maintain information about individual conversations. Note: _recent_ is an optional parameter, which in this example is passed in as _True_.
-
-```
-
-session_id = API.init_talk(user_key, username, host, botname, input_text, recent=True)
-
-```
-
-To continue a conversation with a bot. This function requires a session_id, such as the one returned in the previous example. Note: _recent_ is an optional parameter, which in this example is passed in as _True_.
+To talk to a bot. This function requires a session_id, such as the one returned in the previous example. It has the optional parameters of _recent_, _session_id_, _reset_, and _client_name_.
 
 ```
 
