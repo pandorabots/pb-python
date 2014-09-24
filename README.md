@@ -64,7 +64,7 @@ API.compile_bot(user_key, username, host, botname)
 
 ```
 
-To talk to a bot. This function requires a session_id, such as the one returned in the previous example. It has the optional parameters of _recent_, _session_id_, _reset_, and _client_name_.
+To talk to a bot. It has the optional parameters of _recent_, _session_id_, _reset_, and _client_name_.
 
 ```
 

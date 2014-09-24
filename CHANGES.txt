@@ -2,3 +2,4 @@ v<0.1.0>, <7/10/14> -- Initial release.
 v<0.1.2>, <7/25/14> -- changed link in setup.py
 v<0.1.3>, <9/5/14> -- added client_name parameter
 v<0.1.4>, <9/24/14> -- fixed bug in main
+v<0.1.5>, <9/25/14> -- fixed response in main
