@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='PbPython',
-    version='0.1.2',
+    version='0.1.4',
     author='Michael Kunze',
     author_email='michael.kunze@pandorabots.com',
     packages=['pb_py'],

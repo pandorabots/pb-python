@@ -57,7 +57,7 @@ def compile_bot(user_key,username,host, botname):
         output = message + '\n' + error + '\n'
     print output
 
-def talk(user_key, username, host, botname, input_text, session_id, recent=False, reset=False, trace=False, clientID=false):
+def talk(user_key, username, host, botname, input_text, session_id, recent=False, reset=False, trace=False, clientID=False):
     path = '/talk/' + username + '/' + botname
     url = host_base + host + path
     query = {"user_key": user_key,
