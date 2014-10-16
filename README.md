@@ -76,7 +76,7 @@ This call returns both the bot's response and the session id. Here is an example
 
 ```
 
-result =API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
+result = API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
 bot_response = result['response']
 session_id = result['sessionid']
 print bot_response, session_id
