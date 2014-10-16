@@ -34,7 +34,7 @@ To create a bot:
 
 ```
 
-API.create_bot(user_key, host, username, botname)
+API.create_bot(user_key, username, host, botname)
 
 ```
 
@@ -71,6 +71,18 @@ To talk to a bot. It has the optional parameters of _recent_, _session_id_, _res
 API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
 
 ```
+
+This call returns both the bot's response and the session id. Here is an example that shows capturing and displaying these values.
+
+```
+
+result =API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
+bot_response = result['response']
+session_id = result['sessionid']
+print bot_response, session_id
+
+```
+
 
 To debug input to a bot:
 

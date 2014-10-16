@@ -52,6 +52,7 @@ def compile_bot(user_key,username,host, botname):
         output = botname + ' has been successfully compiled!'
     else:
         result = response.json()
+        print result
         message = result["message"]
         error = str(result["errors"][0])
         output = message + '\n' + error + '\n'
@@ -76,8 +77,10 @@ def talk(user_key, username, host, botname, input_text, session_id=False, recent
     response = requests.post(url, params=query)
     result = response.json()
     status = result['status']
+    output = {}
     if status == 'ok':
-        output = {"response": result['responses'][0]}
+        print result
+        output["response"] =  result['responses'][0]
         if reset:
             output["output"] = 'Bot has been reset.'
         if trace:
