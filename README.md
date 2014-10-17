@@ -30,11 +30,14 @@ host = 'aiaas.pandorabots.com'
 
 ```
 
+Each API call returns a value indicating the success of the call. In the event of an error, a message is returned detailing the error. To receive visual feedback as to the success of your call simply print the result, as in the following examples.
+
 To create a bot:
 
 ```
 
-API.create_bot(user_key, username, host, botname)
+result = API.create_bot(user_key, app_id, host, botname)
+print result
 
 ```
 
@@ -42,7 +45,8 @@ To delete a bot:
 
 ```
 
-API.delete_bot(user_key, username, host, botname)
+result = API.delete_bot(user_key, app_id, host, botname)
+print result
 
 ```
 
@@ -52,7 +56,8 @@ Note: The argument specified by filename should in the same folder as your code,
 
 ```
 
-API.upload_file(user_key, username, host, botname, filename, file_kind)
+result = API.upload_file(user_key, app_id, host, botname, filename, file_kind)
+print result
 
 ```
 
@@ -60,7 +65,8 @@ To compile a bot:
 
 ```
 
-API.compile_bot(user_key, username, host, botname)
+result = API.compile_bot(user_key, app_id, host, botname)
+print result
 
 ```
 
@@ -68,7 +74,7 @@ To talk to a bot. It has the optional parameters of _recent_, _session_id_, _res
 
 ```
 
-API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
+API.talk(user_key, app_id, host, botname, input_text, session_id, recent=True)
 
 ```
 
@@ -76,13 +82,12 @@ This call returns both the bot's response and the session id. Here is an example
 
 ```
 
-result = API.talk(user_key, username, host, botname, input_text, session_id, recent=True)
+result = API.talk(user_key, app_id, host, botname, input_text, session_id, recent=True)
 bot_response = result['response']
 session_id = result['sessionid']
 print bot_response, session_id
 
 ```
-
 
 To debug input to a bot:
 
@@ -90,11 +95,29 @@ Note: session_id, reset, trace, and recent  are all optional parameters. In the 
 
 ```
 
-API.debug_bot(user_key, username, host, botname, input_text, session_id=True, reset=True, trace=True, recent=True)
+result = API.debug_bot(user_key, app_id, host, botname, input_text, session_id=True, reset=True, trace=True, recent=True)
+print result
 
 ```
 
+It should be noted that storing the return values of the various API calls, as in the previous examples, is not required. The following two examples accomplish the same thing, the only difference being that the second example provides feedback as to the success or failure of the call.
 
+Example 1: 
+
+```
+
+API.create_bot(user_key, app_id, host, botname)
+
+```
+
+Example 2:
+
+```
+
+result = API.create_bot(user_key, app_id, host, botname)
+print result
+
+```
 
  
 

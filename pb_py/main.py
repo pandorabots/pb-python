@@ -2,8 +2,8 @@ import requests
 
 host_base = "https://"
 
-def create_bot(user_key,username,host,botname):
-    path = '/bot/' + username +'/' + botname
+def create_bot(user_key,app_id,host,botname):
+    path = '/bot/' + app_id +'/' + botname
     url = host_base + host + path
     query = {"user_key": user_key}
     response = requests.put(url, params=query)
@@ -13,8 +13,8 @@ def create_bot(user_key,username,host,botname):
         output = 'Bot creation failed! ' + response.json()['message'] + '.'
     return output
 
-def delete_bot(user_key,username,host,botname):
-    path = '/bot/' + username +'/' + botname
+def delete_bot(user_key,app_id,host,botname):
+    path = '/bot/' + app_id +'/' + botname
     url = host + path
     url = host_base + host + path
     query = {"user_key": user_key}
@@ -26,8 +26,8 @@ def delete_bot(user_key,username,host,botname):
         output += '%d %s' % (response.status_code, response.reason)
     return output
 
-def upload_file(user_key,username,host,botname,filename,file_kind):
-    path = '/bot/' + username + '/' + botname + '/'
+def upload_file(user_key,app_id,host,botname,filename,file_kind):
+    path = '/bot/' + app_id + '/' + botname + '/'
     if file_kind == 'pdefaults' or file_kind =='properties':
         path += file_kind
     if file_kind == 'map' or file_kind == 'set' or file_kind == 'substitution':
@@ -43,8 +43,8 @@ def upload_file(user_key,username,host,botname,filename,file_kind):
     else:
         return response.reason
 
-def compile_bot(user_key,username,host, botname):
-    path = '/bot/' + username +'/' + botname + '/verify'
+def compile_bot(user_key,app_id,host, botname):
+    path = '/bot/' + app_id +'/' + botname + '/verify'
     url = host_base + host + path
     query = {"user_key": user_key}
     response = requests.get(url, params=query)
@@ -57,8 +57,8 @@ def compile_bot(user_key,username,host, botname):
         output = message + '\n' + error + '\n'
     return output
 
-def talk(user_key, username, host, botname, input_text, session_id=False, recent=False, reset=False, trace=False, clientID=False):
-    path = '/talk/' + username + '/' + botname
+def talk(user_key, app_id, host, botname, input_text, session_id=False, recent=False, reset=False, trace=False, clientID=False):
+    path = '/talk/' + app_id + '/' + botname
     url = host_base + host + path
     query = {"user_key": user_key,
              "input": input_text
@@ -102,7 +102,7 @@ def talk(user_key, username, host, botname, input_text, session_id=False, recent
     return output
 
 
-def debug_bot(user_key, username, host, botname, input_text, session_id='', recent=False, reset=False, trace=False):
-    response = talk(user_key, username, host, botname, input_text, session_id, recent, reset, trace)
+def debug_bot(user_key, app_id, host, botname, input_text, session_id='', recent=False, reset=False, trace=False):
+    response = talk(user_key, app_id, host, botname, input_text, session_id, recent, reset, trace)
     return response
                           
