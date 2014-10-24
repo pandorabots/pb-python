@@ -3,3 +3,4 @@ v<0.1.2>, <7/25/14> -- changed link in setup.py
 v<0.1.3>, <9/5/14> -- added client_name parameter
 v<0.1.4>, <9/24/14> -- fixed bug in main
 v<0.1.5>, <9/25/14> -- fixed response in main
+v<0.1.6>, <10/24/14> -- added list_bots, download_bot, get_files, and delete_file methods, revised upload_file

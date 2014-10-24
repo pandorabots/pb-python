@@ -41,6 +41,15 @@ print result
 
 ```
 
+To get a list of your bots:
+
+```
+
+result = API.create_bot(user_key, app_id, host)
+print result
+
+```
+
 To delete a bot:
 
 ```
@@ -52,11 +61,45 @@ print result
 
 To upload a file to a bot:
 
-Note: The argument specified by filename should in the same folder as your code, and have one of the following extensions: “.aiml”, “.map”, “.set”, “.substitution”, “.properties”, or “.pdefaults”. The file_kind must be one of the six acceptable aiml filetypes: “aiml”, “map”, “set”, “substitution”, “properties”, or “pdefaults”.
+```
+
+result = API.upload_file(user_key, app_id, host, botname, filename)
+print result
 
 ```
 
-result = API.upload_file(user_key, app_id, host, botname, filename, file_kind)
+To delete a file:
+
+```
+
+result = api.delete_file(user_key, app_id, host, botname, filename)
+print result
+
+```
+
+To get a list of all your bot's files:
+
+```
+
+result = API.get_files(user_key, app_id, host, botname)
+print result
+
+```
+
+To download a bot as a zip file:
+
+```
+
+result = API.download_bot(user_key, app_id, host, botname)
+print result
+
+```
+
+By default the bot downloads to the folder where the call was made from, but alternatively you can specify a folder as a download location:
+
+```
+
+result = API.download_bot(user_key, app_id, host, botname, '~/username/Downloads/'
 print result
 
 ```
