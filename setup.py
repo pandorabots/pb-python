@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='PbPython',
-    version='0.1.6',
+    version='0.1.7',
     author='Michael Kunze',
     author_email='michael.kunze@pandorabots.com',
     packages=['pb_py'],
@@ -11,5 +11,5 @@ setup(
     description='Code for making API calls to Pandorabots server.',
     install_requires=[
         "requests >= 2.1.1",
-        ],
+        ]
 )

@@ -45,6 +45,9 @@ def delete_bot(user_key,app_id,host,botname):
 
 def upload_file(user_key,app_id,host,botname,filename):
     path = '/bot/' + app_id + '/' + botname + '/'
+    filepath = filename
+    if '/' in filename:
+        filename = filename.split('/')[-1]
     file_kind = filename.split('.')[-1]
     if file_kind == 'pdefaults' or file_kind =='properties':
         path += file_kind
@@ -56,7 +59,7 @@ def upload_file(user_key,app_id,host,botname,filename):
             output = 'File type must be one of the following: substitution, properties, aiml, map, set, or pdefaults'
             return output
     url = host_base + host + path
-    data = open(filename,'rb').read()
+    data = open(filepath,'rb').read()
     query = {"user_key": user_key}
     response = requests.put(url, params=query, data=data)
     if response.ok:
@@ -194,7 +197,7 @@ def talk(user_key, app_id, host, botname, input_text, session_id=False, recent=F
                     trace_string += str(trace_text[elt]['input'][elt1]) + ' '
                 trace_string += 'Matched pattern: ' + str(trace_text[elt+1]['matched'][0])
                 trace_string += ' from file: ' + trace_text[elt+1]['filename']
-                trace_string += 'template: ' + trace_text[elt+1]['template']
+                trace_string += ' template: ' + trace_text[elt+1]['template']
             output["trace"] = trace_string
         if 'sessionid'  in result:
             output["sessionid"] = result['sessionid']
