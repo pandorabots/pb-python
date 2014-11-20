@@ -45,7 +45,7 @@ To get a list of your bots:
 
 ```
 
-result = API.create_bot(user_key, app_id, host)
+result = API.list_bots(user_key, app_id, host)
 print result
 
 ```
