@@ -188,16 +188,13 @@ def talk(user_key, app_id, host, botname, input_text, session_id=False, recent=F
         if trace:
             trace_text = result['trace']
             trace_string = 'Trace: '
-            length = range(len(trace_text))
-            every_other = length[::2][:-1]
-            for elt in every_other:
-                trace_string +='Level: ' + str(trace_text[elt]['level']) 
-                trace_string += ' Sentence to process: ' 
-                for elt1 in range(len(trace_text[elt]['input'])):
-                    trace_string += str(trace_text[elt]['input'][elt1]) + ' '
-                trace_string += 'Matched pattern: ' + str(trace_text[elt+1]['matched'][0])
-                trace_string += ' from file: ' + trace_text[elt+1]['filename']
-                trace_string += ' template: ' + trace_text[elt+1]['template']
+            for elt in trace_text:
+                if 'status' in elt.keys():
+                    trace_string +='Level: ' + str(elt['level']) 
+                    trace_string += ' Sentence to process: ' + ' '.join(elt['input']) + ' '
+                    trace_string += 'Matched pattern: ' + str(elt['matched'][0])
+                    trace_string += ' from file: ' + elt['filename']
+                    trace_string += ' template: ' + elt['template'] + '\n'
             output["trace"] = trace_string
         if 'sessionid'  in result:
             output["sessionid"] = result['sessionid']
