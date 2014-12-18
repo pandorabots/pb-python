@@ -63,6 +63,7 @@ To upload a file to a bot:
 
 ```
 
+filename = 'test.aiml'
 result = API.upload_file(user_key, app_id, host, botname, filename)
 print result
 
@@ -81,7 +82,17 @@ To get a list of all your bot's files:
 
 ```
 
-result = API.get_files(user_key, app_id, host, botname)
+result = API.list_files(user_key, app_id, host, botname)
+print result
+
+```
+
+To get a file:
+
+```
+
+filename = 'test.aiml'
+result = API.get_file(user_key, app_id, host, botname, filename
 print result
 
 ```

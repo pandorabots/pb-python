@@ -5,3 +5,5 @@ v<0.1.4>, <9/24/14> -- fixed bug in main
 v<0.1.5>, <9/25/14> -- fixed response in main
 v<0.1.6>, <10/24/14> -- added list_bots, download_bot, get_files, and delete_file methods, revised upload_file
 v<0.1.7>, <11/18/14> -- made upload_file accept files not in current working directory
+v<0.1.8>, <12/4/14> -- revised trace processing
+v<0.1.9>, <12/18/14> -- added get_file and changed api method name: get_files --> list_files

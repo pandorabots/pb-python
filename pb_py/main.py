@@ -67,7 +67,7 @@ def upload_file(user_key,app_id,host,botname,filename):
     else:
         return response.reason
 
-def get_files(user_key, app_id, host, botname):
+def list_files(user_key, app_id, host, botname):
     path = '/bot/' + app_id + '/' + botname
     url = host_base + host + path
     query = {"user_key": user_key}
@@ -106,6 +106,24 @@ def get_files(user_key, app_id, host, botname):
         output += pdefaults
     else:
         output = response.reason
+    return output
+
+def get_file(user_key, app_id, host, botname, filename):
+    path = '/bot/' + app_id + '/' + botname +'/'
+    file_kind = filename.split('.')[-1]
+    if file_kind == 'pdefaults' or file_kind =='properties':
+        path += file_kind
+    if file_kind == 'map' or file_kind == 'set' or file_kind == 'substitution':
+        path += file_kind + '/' + filename.split('.')[0]
+    if file_kind == 'aiml':
+        path += 'file/' + filename
+    url = host_base + host + path
+    query = {"user_key": user_key}
+    response = requests.get(url, params=query)
+    if response.ok:
+        output = response.text
+    else:
+        output = "There was an error with you request: " + response.json()["message"]
     return output
 
 def download_bot(user_key, app_id, host, botname, download_location=False):
