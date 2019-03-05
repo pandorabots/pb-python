@@ -1,44 +1,62 @@
-import main
+from main_class import Pandorabots
 
-host = 'pbdpl.pandorabots.com'
-botname = 'brebby'
-app_id = 'un6a04c163'
-user_key = 'pb265413298584842607794142375618755632950'
+host = 'YOUR HOST'
+botname = 'YOUR BOTNAME'
+app_id = 'YOUR APP_ID'
+user_key = 'YOUR USER_KEY'
 test_filename = 'test.aiml'
 
+simple_input = {'message':'hi'}
+advanced_input = {'message':'hi',
+                  'trace':True,
+                  'reset':True,
+                  'that':'Hello',
+                  'topic': 'greetings',
+                  'sessionid': '123',
+                  'recent': True,
+
+                  'reload':True,
+                  'extra': True
+                  }
+atalk_input = {'message':'hi',
+               'sessionid': '123',
+               'recent': True
+                }
+
+main = Pandorabots(user_key, app_id, host, botname)
+
 # test create
-print(main.create_bot(user_key, app_id, host, botname))
+print(main.create_bot(botname).text)
 
 # test list_bots
-print(main.list_bots(user_key, app_id, host))
+print(main.list_bots().text)
 
 # upload file
-print(main.upload_file(user_key, app_id, host, botname, test_filename))
+print(main.upload_file(test_filename).text)
 
 # list files
-print(main.list_files(user_key, app_id, host, botname))
+print(main.list_files().text)
 
 # get file
-print(main.get_file(user_key, app_id, host, botname, test_filename))
+print(main.get_file(test_filename).text)
 
 # download bot
-#print(main.download_bot(user_key, app_id, host, botname))
+print(main.download_bot().text)
 
 # compile_bot
-print(main.compile_bot(user_key, app_id, host, botname))
+print(main.compile_bot().text)
 
 # talk
-print(main.talk(user_key, app_id, host, botname, 'hi'))
+print(main.talk(simple_input).text)
 
 # debug
-print(main.talk(user_key, app_id, host, botname, 'hi', False, True, True, True))
+print(main.talk(advanced_input).text)
 
 #atalk
-print(main.atalk(user_key, app_id, host, botname, 'hi'))
+print(main.atalk(atalk_input).text)
 
 # delete file
-print(main.delete_file(user_key, app_id, host, botname, test_filename))
+print(main.delete_file(test_filename).text)
 
 # test delete
-print(main.delete_bot(user_key, app_id, host, botname))
-
+print(main.delete_bot(botname).text)
