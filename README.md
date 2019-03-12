@@ -29,7 +29,7 @@ python setup.py install
 #### Usage
 Import the Pandorabots object and create an instance with your credentials:
 
-Note: `botname` is not required to create the object but is necessary to run bot-specific APIs
+Note: `botname` is not required to create the object but is necessary to run bot-specific APIs, and `botkey` is only necessary if the atalk botkey api instance is used.
 
 ```
 from main import Pandorabots
@@ -38,9 +38,9 @@ host = 'YOUR HOST'
 botname = 'YOUR BOTNAME'
 app_id = 'YOUR APP_ID'
 user_key = 'YOUR USER_KEY'
-test_filename = 'test.aiml'
+botkey = 'YOUR BOTKEY'
  
-API = Pandorabots(user_key, app_id, host, botname)
+API = Pandorabots(user_key, app_id, host, botname, botkey)
 ```
 Each method returns the response from the Pandorabots API.
 
@@ -86,6 +86,8 @@ To compile a bot:
 ```
 result = API.compile_bot()
 ```
+There are two routes of using the two talk methods. The first makes use of `app_id`, `userkey`, and `botname`. The second  replaces these with `botkey`. To use this second method please ensure `host` is set to `api.pandorabots.com` and `botkey` is set to `YOUR_BOTKEY`.
+
 To talk to a bot you need to send an input object of the form:
 ```
 input_object = {'message':'hi',
@@ -101,10 +103,23 @@ input_object = {'message':'hi',
 
 result = API.talk(input_object)
 ```
-Only the `message` parameter is required. The other paramters can be included for debugging purposes. Note: `client_name` and `trace` be specified concurrently for security purposes.
 
-To talk with your bot via the atalk (anonymous talk) api send an input object of the form:
+To use the `botkey` route:
+```
+usebotkey = True
+result = API.talk(input_object, usebotkey)
+```
+In the `input_object` only the `message` parameter is required. The other paramters can be included for debugging purposes. Note: `client_name` and `trace` cannot be specified concurrently for security purposes.
+
+To talk with your bot via the atalk (anonymous talk) api:
 ```
 result = API.atalk(input_object)
 ```
+
+To use the `botkey` route:
+```
+usebotkey = True
+result = API.atalk(input_object, usebotkey)
+```
+Alternatively, there
 For more information see the [developer docs](https://developer.pandorabots.com/docs) or the test file `test.py` in the `pb_py` folder.
