@@ -1,20 +1,26 @@
 import requests
 
 class Pandorabots:
-    def __init__(self, user_key, app_id, host, botname=False):
+    def __init__(self, user_key, app_id, host, botname=False, botkey=False):
         self.user_key = user_key
         self.app_id = app_id
-        self.host = "https://" + host
+        self.host = host
         self.botname = botname
         self.no_botname_error = {'error':'please set a botname via select_bot("your_botname")'}
         self.no_message_error = {'error':'please include a message string input to your bot, ex. {"message":"hello"}")'}
+        self.no_botkey_error = {'error':'please set a botkey via set_botkey("your_botkey")'}
+        self.use_api_host_error = {'error':'host must be "api.pandorabots.com" to use atalk with a botkey'}
+        self.botkey = botkey
         
+    def set_botkey(self, botkey):
+        self.botkey = botkey
+
     def select_bot(self, botname):
         self.botname = botname
 
     def create_bot(self, botname):
         path = '/bot/' + self.app_id +'/' + self.botname
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.put(url, params=query)
         if response.ok :
@@ -23,14 +29,14 @@ class Pandorabots:
     
     def list_bots(self):
         path = '/bot/' + self.app_id
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.get(url, params=query)
         return response
 
     def delete_bot(self, botname):
         path = '/bot/' + self.app_id +'/' + self.botname
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.delete(url, params=query)
         return response
@@ -52,7 +58,7 @@ class Pandorabots:
         if path == '/bot/' + self.app_id +'/' + self.botname + '/':
             output = 'File type must be one of the following: substitution, properties, aiml, map, set, or pdefaults'
             return output
-        url = self.host + path
+        url = "https://" + self.host + path
         data = open(filepath,'rb').read()
         query = {"user_key": self.user_key}
         response = requests.put(url, params=query, data=data)
@@ -62,7 +68,7 @@ class Pandorabots:
         if not self.botname:
             return self.no_botname_error
         path = '/bot/' + self.app_id + '/' + self.botname
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.get(url,params=query)
         return response
@@ -78,7 +84,7 @@ class Pandorabots:
             path += file_kind + '/' + filename.split('.')[0]
         if file_kind == 'aiml':
             path += 'file/' + filename
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.get(url, params=query)
         return response
@@ -87,7 +93,7 @@ class Pandorabots:
         if not self.botname:
             return self.no_botname_error
         path = '/bot/' + self.app_id + '/' + self.botname 
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key,
                  "return": 'zip'}
         response = requests.get(url, params=query)
@@ -107,7 +113,7 @@ class Pandorabots:
         if path == '/bot/' + self.app_id +'/' + self.botname + '/':
             output = 'File type must be one of the following: substitution, properties, aiml, map, set, or pdefaults'
             return output
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.delete(url, params=query)
         return response
@@ -116,21 +122,29 @@ class Pandorabots:
         if not self.botname:
             return self.no_botname_error
         path = '/bot/' + self.app_id +'/' + self.botname + '/verify'
-        url = self.host + path
+        url = "https://" + self.host + path
         query = {"user_key": self.user_key}
         response = requests.get(url, params=query)
         return response
 
-    def talk(self, input):
-        if not self.botname:
+    def talk(self, input, usebotkey=False):
+        if (usebotkey and not self.botkey) :
+            return self.no_botkey_error
+        if (usebotkey and not self.host == 'api.pandorabots.com'):
+            return self.use_api_host_error
+        if not usebotkey and not self.botname:
             return self.no_botname_error
         if not 'message' in input:
             return self.no_message_error
-        path = '/talk/' + self.app_id + '/' + self.botname
-        url = self.host + path
-        query = {"user_key": self.user_key,
-                 "input": input['message']
-                 }
+        path = '/atalk'
+        if (not usebotkey):
+            path += '/' + self.app_id + '/' + self.botname
+        url = "https://" + self.host + path
+        query = {"user_key": self.user_key}
+        if usebotkey:
+            query['botkey'] = self.botkey
+        else:
+            query["user_key"] = self.user_key
         if 'sessionid' in input:
             query['sessionid'] = input['sessionid']
         if 'recent' in input: 
@@ -152,16 +166,24 @@ class Pandorabots:
         response = requests.post(url, params=query)
         return response
     
-    def atalk(self, input):
-        if not self.botname:
+    def atalk(self, input, usebotkey=False):
+        if (usebotkey and not self.botkey) :
+            return self.no_botkey_error
+        if (usebotkey and not self.host == 'api.pandorabots.com'):
+            return self.use_api_host_error
+        if not usebotkey and not self.botname:
             return self.no_botname_error
         if not 'message' in input:
             return self.no_message_error
-        path = '/atalk/' + self.app_id + '/' + self.botname
-        url = self.host + path
-        query = {"user_key": self.user_key,
-                 "input": input['message']
-                 }
+        path = '/atalk'
+        if (not usebotkey):
+            path += '/' + self.app_id + '/' + self.botname
+        url = "https://" + self.host + path
+        query = {"input": input['message']}
+        if usebotkey:
+            query['botkey'] = self.botkey
+        else:
+            query["user_key"] = self.user_key
         if 'sessionid' in input:
             query['sessionid'] = input['sessionid']
         if 'recent' in input: 

@@ -1,10 +1,11 @@
-from main_class import Pandorabots
+from main import Pandorabots
 
 host = 'YOUR HOST'
 botname = 'YOUR BOTNAME'
 app_id = 'YOUR APP_ID'
 user_key = 'YOUR USER_KEY'
 test_filename = 'test.aiml'
+botkey = 'YOUR BOTKEY'
 
 simple_input = {'message':'hi'}
 advanced_input = {'message':'hi',
@@ -54,6 +55,9 @@ print(main.talk(advanced_input).text)
 
 #atalk
 print(main.atalk(atalk_input).text)
+
+#atalk with botkey
+print(main.atalk(atalk_input, True).text)
 
 # delete file
 print(main.delete_file(test_filename).text)
